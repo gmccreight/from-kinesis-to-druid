@@ -1,0 +1,12 @@
+#!/usr/bin/env ruby
+
+require_relative '../lib/kinesis/consumer'
+require_relative '../sample_record_processor'
+
+processor = nil
+case ENV['KINESIS_PROCESSOR']
+when 'sample'
+  processor = SampleRecordProcessor.new
+end
+
+Kinesis::Consumer.new(processor).run if __FILE__ == $PROGRAM_NAME
