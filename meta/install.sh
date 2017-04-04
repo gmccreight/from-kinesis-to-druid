@@ -1,5 +1,13 @@
 #!/bin/bash
 
+# from-kinesis requires these packages:
+
+sudo apt-get install gcc patch git ruby rake rubygems ruby-dev -y
+
+sudo gem install aws-sdk
+
+sudo apt install ruby-bundler -y
+
 # to-druid requires these packages:
 
 # Tranquility requires Java
