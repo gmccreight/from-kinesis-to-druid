@@ -1,12 +1,12 @@
 #!/usr/bin/env ruby
 
 require_relative '../lib/kinesis/consumer'
-require_relative '../sample_record_processor'
+require_relative '../eventer_stream_processor'
 
 processor = nil
 case ENV['KINESIS_PROCESSOR']
 when 'eventer_stream'
-  processor = SampleRecordProcessor.new
+  processor = EventerStreamProcessor.new
 end
 
 Kinesis::Consumer.new(processor).run if __FILE__ == $PROGRAM_NAME

@@ -1,8 +1,9 @@
 require_relative 'lib/kinesis/consumer'
+
 require 'tmpdir'
 require 'fileutils'
 
-class SampleRecordProcessor
+class EventerStreamProcessor
   def init(shard_id)
     @output = open("#{shard_id}-#{Time.now.to_i}.log", 'w')
   end
