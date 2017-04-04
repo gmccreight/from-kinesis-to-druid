@@ -5,7 +5,7 @@ require_relative '../sample_record_processor'
 
 processor = nil
 case ENV['KINESIS_PROCESSOR']
-when 'sample'
+when 'eventer_stream'
   processor = SampleRecordProcessor.new
 end
 
