@@ -1,0 +1,4 @@
+#!/bin/sh
+
+vagrant ssh -- -R 2181:localhost:2181
+
