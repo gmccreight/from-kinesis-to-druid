@@ -1,9 +1,9 @@
 #!/bin/bash
 
-sudo apt-get install default-jre -y
-sudo apt-get install python -y
+# to-druid requires these packages:
 
-(
-  cd to-druid
-  ./install.sh
-)
+# Tranquility requires Java
+sudo apt-get install default-jre -y
+
+# The generate-example-metrics script is written in Python
+sudo apt-get install python -y
