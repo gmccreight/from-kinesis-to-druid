@@ -42,7 +42,10 @@ def main():
       'server': server,
       'http_method': 'GET',
       'http_code': '200',
-      'unit': 'milliseconds'
+      'unit': 'milliseconds',
+
+      # eventer dimensions
+      'event_type': random.choice(['information', 'warning', 'error', 'critical'])
     }))
 
     count += 1

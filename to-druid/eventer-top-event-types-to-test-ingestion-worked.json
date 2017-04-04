@@ -3,13 +3,13 @@
   "dataSource" : "eventer",
   "intervals" : ["2017-04-03/2017-04-05"],
   "granularity" : "all",
-  "dimension" : "page",
-  "metric" : "edits",
+  "dimension" : "event_type",
+  "metric" : "event_type_count",
   "threshold" : 25,
   "aggregations" : [
     {
       "type" : "longSum",
-      "name" : "edits",
+      "name" : "event_type_count",
       "fieldName" : "count"
     }
   ]
