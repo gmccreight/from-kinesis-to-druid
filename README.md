@@ -23,7 +23,9 @@ To run the process:
 
 (Note, this is still WIP)
 
-    cd /app/from-kinesis; bundle exec rake 'kinesis:run[eventer_stream]'
+    cd /app/from-kinesis; AWS_ACCESS_KEY_ID="..." AWS_SECRET_ACCESS_KEY="..." bundle exec rake 'kinesis:run[eventer_stream]'
+
+If you want, you can store that information in a `/app/from-kinesis/local_run.sh` file that is ignored by git.
 
 ## to-druid
 
