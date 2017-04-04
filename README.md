@@ -60,3 +60,10 @@ Then you can import the data, as in the example.
     cd /app/to-druid/; ./generate-example-metrics | curl -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/eventer
 
 You should see a result like: `{"result":{"received":25,"sent":25}}`
+
+On the **host OS**, you will be able to see the recently-added events by running:
+
+(note that you may need to change the timeframe specified in the `eventer-top-pages.json` file
+
+    cd from-kinesis-to-druid/to-druid
+    curl -L -H'Content-Type: application/json' -XPOST --data-binary @eventer-top-pages-to-test-ingestion-worked.json http://localhost:8082/druid/v2/?pretty

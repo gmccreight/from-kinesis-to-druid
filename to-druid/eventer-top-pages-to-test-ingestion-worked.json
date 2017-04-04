@@ -1,0 +1,16 @@
+{
+  "queryType" : "topN",
+  "dataSource" : "eventer",
+  "intervals" : ["2017-04-03/2017-04-05"],
+  "granularity" : "all",
+  "dimension" : "page",
+  "metric" : "edits",
+  "threshold" : 25,
+  "aggregations" : [
+    {
+      "type" : "longSum",
+      "name" : "edits",
+      "fieldName" : "count"
+    }
+  ]
+}
