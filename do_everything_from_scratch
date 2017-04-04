@@ -4,4 +4,3 @@ vagrant destroy -f
 vagrant up
 
 vagrant ssh -c "cd /app; ./meta/install.sh"
-vagrant ssh -c "cd /app; ./meta/test.sh"

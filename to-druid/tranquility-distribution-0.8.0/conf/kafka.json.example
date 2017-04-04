@@ -1,0 +1,167 @@
+{
+   "dataSources" : [
+      {
+         "spec" : {
+            "dataSchema" : {
+               "parser" : {
+                  "type" : "string",
+                  "parseSpec" : {
+                     "timestampSpec" : {
+                        "format" : "auto",
+                        "column" : "timestamp"
+                     },
+                     "dimensionsSpec" : {
+                        "spatialDimensions" : [
+                           {
+                              "dims" : [
+                                 "lat",
+                                 "lon"
+                              ],
+                              "dimName" : "geo"
+                           }
+                        ],
+                        "dimensions" : [
+                           "text",
+                           "hashtags",
+                           "lat",
+                           "lon",
+                           "source",
+                           "retweet",
+                           "lang",
+                           "utc_offset",
+                           "screen_name",
+                           "verified"
+                        ]
+                     },
+                     "format" : "json"
+                  }
+               },
+               "dataSource" : "twitter",
+               "granularitySpec" : {
+                  "segmentGranularity" : "hour",
+                  "type" : "uniform",
+                  "queryGranularity" : "none"
+               },
+               "metricsSpec" : [
+                  {
+                     "type" : "count",
+                     "name" : "tweets"
+                  },
+                  {
+                     "fieldName" : "followers",
+                     "type" : "longSum",
+                     "name" : "followers"
+                  },
+                  {
+                     "name" : "retweets",
+                     "type" : "longSum",
+                     "fieldName" : "retweets"
+                  },
+                  {
+                     "fieldName" : "friends",
+                     "type" : "longSum",
+                     "name" : "friends"
+                  },
+                  {
+                     "name" : "statuses",
+                     "type" : "longSum",
+                     "fieldName" : "statuses"
+                  }
+               ]
+            },
+            "tuningConfig" : {
+               "maxRowsInMemory" : "100000",
+               "type" : "realtime",
+               "windowPeriod" : "PT10M",
+               "intermediatePersistPeriod" : "PT10M"
+            }
+         },
+         "properties" : {
+            "topicPattern.priority" : "1",
+            "topicPattern" : "twitter"
+         }
+      },
+      {
+         "spec" : {
+            "dataSchema" : {
+               "granularitySpec" : {
+                  "queryGranularity" : "none",
+                  "type" : "uniform",
+                  "segmentGranularity" : "hour"
+               },
+               "dataSource" : "wikipedia",
+               "parser" : {
+                  "type" : "string",
+                  "parseSpec" : {
+                     "timestampSpec" : {
+                        "format" : "auto",
+                        "column" : "timestamp"
+                     },
+                     "format" : "json",
+                     "dimensionsSpec" : {
+                        "dimensions" : [
+                           "page",
+                           "language",
+                           "user",
+                           "unpatrolled",
+                           "newPage",
+                           "robot",
+                           "anonymous",
+                           "namespace",
+                           "continent",
+                           "country",
+                           "region",
+                           "city"
+                        ]
+                     }
+                  }
+               },
+               "metricsSpec" : [
+                  {
+                     "type" : "count",
+                     "name" : "count"
+                  },
+                  {
+                     "type" : "doubleSum",
+                     "name" : "added",
+                     "fieldName" : "added"
+                  },
+                  {
+                     "name" : "deleted",
+                     "type" : "doubleSum",
+                     "fieldName" : "deleted"
+                  },
+                  {
+                     "name" : "delta",
+                     "type" : "doubleSum",
+                     "fieldName" : "delta"
+                  }
+               ]
+            },
+            "tuningConfig" : {
+               "type" : "realtime",
+               "intermediatePersistPeriod" : "PT10M",
+               "windowPeriod" : "PT10M",
+               "maxRowsInMemory" : 75000
+            }
+         },
+         "properties" : {
+            "task.partitions" : "2",
+            "task.replicants" : "2",
+            "topicPattern" : "wikipedia.*",
+            "topicPattern.priority" : "1"
+         }
+      }
+   ],
+   "properties" : {
+       "zookeeper.connect" : "localhost:2181",
+       "zookeeper.timeout" : "PT20S",
+       "druid.selectors.indexing.serviceName" : "druid/overlord",
+       "druid.discovery.curator.path" : "/druid/discovery",
+       "kafka.zookeeper.connect" : "localhost:2181",
+       "kafka.group.id" : "tranquility-kafka",
+       "consumer.numThreads" : "2",
+       "commit.periodMillis" : "15000",
+       "reportDropsAsExceptions" : "false"
+    }
+}

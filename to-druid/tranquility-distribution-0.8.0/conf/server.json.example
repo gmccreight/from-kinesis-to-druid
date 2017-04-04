@@ -1,0 +1,59 @@
+{
+   "dataSources" : [
+      {
+         "spec" : {
+            "dataSchema" : {
+               "dataSource" : "foo",
+               "metricsSpec" : [
+                  {
+                     "type" : "count",
+                     "name" : "count"
+                  },
+                  {
+                     "fieldName" : "x",
+                     "type" : "doubleSum",
+                     "name" : "x"
+                  }
+               ],
+               "granularitySpec" : {
+                  "segmentGranularity" : "hour",
+                  "queryGranularity" : "none",
+                  "type" : "uniform"
+               },
+               "parser" : {
+                  "type" : "string",
+                  "parseSpec" : {
+                     "format" : "json",
+                     "timestampSpec" : {
+                        "column" : "timestamp",
+                        "format" : "auto"
+                     },
+                     "dimensionsSpec" : {
+                        "dimensions" : [
+                           "dim1",
+                           "dim2",
+                           "dim3"
+                        ]
+                     }
+                  }
+               }
+            },
+            "tuningConfig" : {
+               "type" : "realtime",
+               "windowPeriod" : "PT10M",
+               "intermediatePersistPeriod" : "PT10M",
+               "maxRowsInMemory" : 75000
+            }
+         },
+         "properties" : {
+            "task.partitions" : "1",
+            "task.replicants" : "1"
+         }
+      }
+   ],
+   "properties" : {
+      "zookeeper.connect" : "localhost",
+      "http.port" : "8200",
+      "http.threads" : "40"
+   }
+}
