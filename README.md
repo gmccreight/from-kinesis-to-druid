@@ -12,7 +12,18 @@ Vagrant to closely mimic the production setup.
 
 ## from-kinesis
 
-TODO
+A Kinesis application stores all of its state information in Dynamo.  The table
+name in Dynamo is `EventerStreamToDruid`
+
+If you want to be able to run the Kinesis consumer over and over again, you should
+comment out the `Kinesis::Consumer.checkpoint(last_seq) if last_seq` line in
+the `eventer_stream_processor.rb` file.
+
+To run the process:
+
+(Note, this is still WIP)
+
+    cd /app/from-kinesis; bundle exec rake 'kinesis:run[eventer_stream]'
 
 ## to-druid
 
