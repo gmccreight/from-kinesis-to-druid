@@ -57,6 +57,6 @@ the same quickstart link mentioned above.)
 
 Then you can import the data, as in the example.
 
-    cd /app/to-druid/; ./generate-example-metrics | curl -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/metrics
+    cd /app/to-druid/; ./generate-example-metrics | curl -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/eventer
 
 You should see a result like: `{"result":{"received":25,"sent":25}}`

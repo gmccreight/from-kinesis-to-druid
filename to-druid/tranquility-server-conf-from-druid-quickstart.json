@@ -1,9 +1,9 @@
 {
   "dataSources" : {
-    "metrics" : {
+    "eventer" : {
       "spec" : {
         "dataSchema" : {
-          "dataSource" : "metrics",
+          "dataSource" : "eventer",
           "parser" : {
             "type" : "string",
             "parseSpec" : {
