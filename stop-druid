@@ -1,0 +1,8 @@
+#!/bin/bash
+
+cd ~/foreign_src/druid-0.9.2
+killall -9 java
+rm -rf var
+brew services stop zookeeper
+bin/init
+
