@@ -8,10 +8,6 @@ sudo apt-get install default-jre -y
 # The generate-example-metrics script is written in Python
 sudo apt-get install python -y
 
-# Making Tranquility start on boot requires Upstart.
-
-sudo apt-get install upstart -y
-
 cat << EOT > /tmp/start-tranquility.sh
 #!/bin/bash
 
