@@ -3,9 +3,12 @@
 This service pulls data from a Kinesis stream and sends data to Druid using
 the Tranquility server (which it runs locally).
 
-I have broken the project, and this documention into two sections describing
+I have broken the project, and this documention, into two sections describing
 each of the portions of work that this service does, `from-kinesis` and
 `to-druid`.
+
+The service will ultimately be running on Ubuntu 16.04 on production, so I use
+Vagrant to closely mimic the production setup.
 
 ## from-kinesis
 
@@ -13,20 +16,26 @@ TODO
 
 ## to-druid
 
-### Prerequisites
+### Development
+
+Note that there is a `development_do_everything_from_scratch` script that will
+completely reset the Vagrant box and re-install the Ubuntu packages needed to
+run the scripts listed below.
+
+#### Prerequisites
 
 This service presumes Druid is running somewhere, and that it can access the
 Zookeeper instance associated with that running version of Druid.  For
 development purposes, you can run Druid (and Zookeeper) on your local Mac using
 the instructions referenced in the "On the Host OS" section.
 
-### On the Host OS
+#### On the Host OS
 
 Follow the instructions here
 http://druid.io/docs/0.9.2/tutorials/quickstart.html for running Zookeeper and
 Druid on your Mac.
 
-### In the Service (VM for development instructions)
+#### In the Service (VM for development instructions)
 
 In development this service runs in Vagrant, which very closely mirrors how it
 will run on production.
