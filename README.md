@@ -63,7 +63,7 @@ You should see a result like: `{"result":{"received":25,"sent":25}}`
 
 On the **host OS**, you will be able to see the recently-added events by running:
 
-(note that you may need to change the timeframe specified in the `eventer-top-pages.json` file
+(note that you may need to change the timeframe specified in the `eventer-top-event-types-to-test-ingestion-worked.json` file
 
     cd from-kinesis-to-druid/to-druid
     curl -L -H'Content-Type: application/json' -XPOST --data-binary @eventer-top-event-types-to-test-ingestion-worked.json http://localhost:8082/druid/v2/?pretty
