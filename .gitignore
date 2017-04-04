@@ -2,6 +2,7 @@
 ubuntu-xenial-16.04-cloudimg-console.log
 .vagrant
 jars
+shardId-*.log
 
 # Easy place to put your ENV while starting out
 local_run.sh
