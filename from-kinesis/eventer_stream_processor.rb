@@ -16,7 +16,11 @@ class EventerStreamProcessor
 
     last_seq = nil
 
-    druid_exporter = DruidExporter.new(@shard_id, chunk_size: 20, debug_level: 3)
+    # TODO: make environmental variables
+    production_tranquility_url = "http://druid-tranquility.carrot.onl:8200/v1/post/eventer"
+    _local_tranquility_url = "http://localhost:8200/v1/post/eventer"
+
+    druid_exporter = DruidExporter.new(@shard_id, chunk_size: 20, exporter_url: production_tranquility_url, debug_level: 3)
 
     records.each do |record|
       begin

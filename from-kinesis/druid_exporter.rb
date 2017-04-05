@@ -3,9 +3,10 @@ require 'time'
 
 class DruidExporter
 
-  def initialize(shard_id, chunk_size:, debug_level:)
+  def initialize(shard_id, chunk_size:, exporter_url:, debug_level:)
     @shard_id = shard_id
     @debug_level = debug_level
+    @exporter_url = exporter_url
     @chunk_size = chunk_size
     reset_data
   end
@@ -82,7 +83,11 @@ class DruidExporter
     # This could eventually become a direct call as opposed to sending a file
     def send_data_to_tranquility_server(filename)
       debug(1, "sending filename #{filename}")
-      result = `cat #{filename} | curl -s -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/eventer`
+      if @exporter_url
+        result = `cat #{filename} | curl -s -XPOST -H'Content-Type: application/json' --data-binary @- #{@exporter_url}`
+      else
+        result = "no @exporter_url specified... could not send"
+      end
       debug(1, "result of sending filename #{filename}: #{result}")
     end
 
