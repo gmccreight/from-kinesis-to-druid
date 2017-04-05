@@ -22,6 +22,7 @@ class EventerStreamProcessor
 
     druid_exporter = DruidExporter.new(@shard_id, chunk_size: 1000, exporter_url: production_tranquility_url, debug_level: 1)
 
+    puts records.size
     records.each do |record|
       begin
         @output.puts record['data']
@@ -35,7 +36,7 @@ class EventerStreamProcessor
 
     druid_exporter.finish
 
-    # Kinesis::Consumer.checkpoint(last_seq) if last_seq
+    Kinesis::Consumer.checkpoint(last_seq) if last_seq
   end
 
   def shutdown(reason)
