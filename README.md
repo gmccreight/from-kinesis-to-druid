@@ -35,32 +35,22 @@ Note that there is a `development_do_everything_from_scratch` script that will
 completely reset the Vagrant box and re-install the Ubuntu packages needed to
 run the scripts listed below.
 
-#### Prerequisites
-
-This service presumes Druid is running somewhere, and that it can access the
-Zookeeper instance associated with that running version of Druid.  For
-development purposes, you can run Druid (and Zookeeper) on your local Mac using
-the instructions referenced in the "On the Host OS" section.
-
-#### On the Host OS
-
-Follow the instructions here
-http://druid.io/docs/0.9.2/tutorials/quickstart.html for running Zookeeper and
-Druid on your Mac.
-
-#### In the Service (VM for development instructions)
+#### Running and testing the service
 
 In development this service runs in Vagrant, which very closely mirrors how it
 will run on production.
 
 Tranquility Server, which is the streaming data import mechanism that will run
-on this service, requires a connection to Zookeeper.  Since Zookeeper will be
-running on the host OS, you will need to set up a reverse port forward to allow
-the VM to connect to Zookeeper on the host.
+on this service, requires a connection to Zookeeper.  To start that connection,
+after you do
 
-    vagrant ssh -- -R 2181:localhost:2181
+    vagrant ssh
 
-That will SSH you onto the development VM with the port-forward set up.
+you can run
+
+    cd /app; ./run-druid
+
+which will run zookeeper and druid.
 
 First, you will want to run the Tranquility server (note: the conf file is
 copied from the druid-0.9.2 conf-quickstart directory, which is available at
@@ -74,9 +64,6 @@ Then you can import the data, as in the example.
 
 You should see a result like: `{"result":{"received":25,"sent":25}}`
 
-On the **host OS**, you will be able to see the recently-added events by running:
+Next, you can run a query to see if the aggregation of that data works
 
-(note that you may need to change the timeframe specified in the `eventer-top-event-types-to-test-ingestion-worked.json` file
-
-    cd from-kinesis-to-druid/to-druid
-    curl -L -H'Content-Type: application/json' -XPOST --data-binary @eventer-top-event-types-to-test-ingestion-worked.json http://localhost:8082/druid/v2/?pretty
+    cd /app/to-druid/; curl -L -H'Content-Type: application/json' -XPOST --data-binary @eventer-top-event-types-to-test-ingestion-worked.json http://localhost:8082/druid/v2/?pretty

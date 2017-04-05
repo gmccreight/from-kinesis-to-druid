@@ -1,0 +1,8 @@
+#!/bin/bash
+
+# On the host OS you will need virtualbox and vagrant.
+
+# Once you have them installed, you can run ./development_do_everything_from_scratch to get the VM set up
+
+brew install Caskroom/cask/virtualbox
+brew install Caskroom/cask/vagrant
