@@ -1,4 +1,5 @@
 #!/bin/sh
 
-vagrant ssh -- -R 2181:localhost:2181
+echo "just use 'vagrant ssh' now... no need for funny port forwarding"
 
+echo remove this message at some point in the future...
