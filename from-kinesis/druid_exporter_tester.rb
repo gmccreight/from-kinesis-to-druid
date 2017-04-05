@@ -6,7 +6,7 @@ url = ''
 if ARGV[0] == 'local'
   url = "http://localhost:8200/v1/post/eventer"
 elsif ARGV[0] == 'prod'
-  url = "http://druid-tranquility.carrot.onl:8200/v1/post/eventer"
+  url = "http://druid-tranquility.fernet.io:8200/v1/post/eventer"
 else
   STDERR.puts "must specify 'local' or 'prod'"
   exit 1
