@@ -74,7 +74,7 @@ class DruidExporter
     end
 
     def write_data_to_file
-      filename = "var/to-import-into-druid-from-shardId-#{@shard_id}-#{Time.now.to_f.to_s.sub(/\./, '-')}.txt"
+      filename = "var/to-import-into-druid-from-#{@shard_id}-#{Time.now.to_f.to_s.sub(/\./, '-')}.txt"
       File.write(filename, @data.join("\n"))
       filename
     end
