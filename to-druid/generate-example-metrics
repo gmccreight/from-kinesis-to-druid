@@ -9,7 +9,7 @@ import argparse
 import json
 import random
 import sys
-from datetime import datetime
+import datetime
 
 def main():
   parser = argparse.ArgumentParser(description='Generate example page request latency metrics.')
@@ -18,7 +18,9 @@ def main():
 
   count = 0
   while args.count < 0 or count < args.count:
-    timestamp = datetime.utcnow().strftime("%Y-%m-%dT%H:%M:%SZ")
+    random_seconds = float(random.randint(1,60*60*24*30))
+    seconds_per_day = float(60*60*24)
+    timestamp = (datetime.datetime.utcnow() - datetime.timedelta(random_seconds/seconds_per_day)).strftime("%Y-%m-%dT%H:%M:%SZ")
 
     r = random.randint(1, 4)
     if r == 1 or r == 2:
