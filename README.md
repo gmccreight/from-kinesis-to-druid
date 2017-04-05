@@ -15,17 +15,33 @@ Vagrant to closely mimic the production setup.
 A Kinesis application stores all of its state information in Dynamo.  The table
 name in Dynamo is `EventerStreamToDruid`
 
-If you want to be able to run the Kinesis consumer over and over again, you should
-comment out the `Kinesis::Consumer.checkpoint(last_seq) if last_seq` line in
-the `eventer_stream_processor.rb` file.
+If you want to be able to run the Kinesis consumer over and over again, you
+should comment out the `Kinesis::Consumer.checkpoint(last_seq) if last_seq`
+line in the `eventer_stream_processor.rb` file.
 
 To run the process:
 
-(Note, this is still WIP)
+(Note, this is still WIP.  For example, we don't currently update the
+checkpoint, but we will need to very soon)
 
     cd /app/from-kinesis; AWS_ACCESS_KEY_ID="..." AWS_SECRET_ACCESS_KEY="..." bundle exec rake 'kinesis:run[eventer_stream]'
 
-If you want, you can store that information in a `/app/from-kinesis/local_run.sh` file that is ignored by git.
+If you want, you can store that information in a
+`/app/from-kinesis/local_run.sh` file that is ignored by git.
+
+It will spit out files... some of them will be called
+`to-import-into-druid-shardId-...txt`
+
+We will soon automate this process, but for now, assuming the `timestamp` field
+is within the time range required by the ingest (it has a narrow window), then
+it will be imported.  So, you can run something like this:
+
+    cd /app/from-kinesis/; cat to-import-into-druid-shardId-000000000001-1491359322.txt | curl -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/eventer
+
+If you see something like `{"result":{"received":5,"sent":1}}` that indicates
+that only a portion of the records were uploaded because some did not meet the
+time constraints.  In practice this means that some of our old Kinesis records
+do not get ingested.
 
 ## to-druid
 
