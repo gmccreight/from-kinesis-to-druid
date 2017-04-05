@@ -8,11 +8,11 @@
 # ...that means that tranquility (the server running on port 8200) got the data
 # but did not import it.  One reason that can happen is because the timestamp
 # (in the timestamp field) is too far behind for Druid to import it... it seems
-# like it's something like 10 minutes (empiricaly).
+# like it's something like 10 minutes (empirically).
 
 require_relative 'druid_exporter'
 
-shard_id = "000000001"
+shard_id = "shardId-000000000000"
 
 debug_level = 3 # Show absolutely everything
 exporter = DruidExporter.new(shard_id, chunk_size: 3, debug_level: debug_level)
