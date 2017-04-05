@@ -13,7 +13,7 @@ tmux \
   neww -n testing-example-metrics \; \
   send-keys 'sleep 20; cd /app/to-druid/; ./generate-example-metrics | curl -XPOST -H"Content-Type: application/json" --data-binary @- http://localhost:8200/v1/post/eventer' C-m \; \
   neww -n testing-druid-export \; \
-  send-keys 'cd /app/from-kinesis/; ./druid_exporter_tester.rb' \; \
+  send-keys 'cd /app/from-kinesis/; ./druid_exporter_tester.rb local' \; \
   neww -n kill-session \; \
   send-keys 'tmux kill-session -t from-kinesis-to-druid' \; \
   selectw -t testing-example-metrics
