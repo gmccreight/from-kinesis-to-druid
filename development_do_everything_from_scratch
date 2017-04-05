@@ -4,3 +4,8 @@ vagrant destroy -f
 vagrant up
 
 vagrant ssh -c "cd /app; ./meta/install.sh"
+
+# Also, since you want to be able to develop easily, install druid and
+# zookeeper right within the VM.
+vagrant ssh -c "cd /app; ./meta/install_druid.sh"
+vagrant ssh -c "cd /app; ./meta/install_zookeeper.sh"
