@@ -82,7 +82,7 @@ class DruidExporter
     # This could eventually become a direct call as opposed to sending a file
     def send_data_to_tranquility_server(filename)
       debug(1, "sending filename #{filename}")
-      result = `cat #{filename} | curl -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/eventer`
+      result = `cat #{filename} | curl -s -XPOST -H'Content-Type: application/json' --data-binary @- http://localhost:8200/v1/post/eventer`
       debug(1, "result of sending filename #{filename}: #{result}")
     end
 
