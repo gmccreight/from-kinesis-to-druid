@@ -3,6 +3,7 @@ require_relative 'lib/kinesis/consumer'
 require 'tmpdir'
 require 'fileutils'
 require 'json'
+require 'time'
 
 class EventerStreamProcessor
   def init(shard_id)
@@ -32,8 +33,15 @@ class EventerStreamProcessor
         druid_records.each do |druid_record|
           begin
             my_hash = JSON.parse(druid_record)
-            if my_hash.key?('event_name')
-              foo.puts druid_record
+            new_hash = {}
+
+            # remove the ":foo" colon at the beginning of the events
+            my_hash.each do |k, v|
+              new_hash[k.sub(/^:/, '')] = v
+            end
+            if new_hash.key?('event_name')
+              new_hash['timestamp'] = Time.parse(new_hash['event_date_time_utc']).iso8601
+              foo.puts JSON.generate(new_hash)
               foo.flush
             end
           rescue
