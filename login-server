@@ -1,5 +1,3 @@
 #!/bin/sh
 
-echo "just use 'vagrant ssh' now... no need for funny port forwarding"
-
-echo remove this message at some point in the future...
+vagrant ssh -- -L 5901:localhost:5901 -L 8083:localhost:8083
